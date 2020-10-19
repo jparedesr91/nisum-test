@@ -47,7 +47,7 @@ public class UserTokenSessionServiceImpl implements UserTokenSessionService {
             userTokenSessionRepository.delete(userTokenSessionFromDB);
             throw new UsernameNotFoundException(USER + username + " token has expired. Please generate new token.");
 
-        }else if(!userTokenSession.equals(userTokenSessionFromDB)) {
+        }/*else if(!userTokenSession.equals(userTokenSessionFromDB)) {
 
             if (!userTokenSessionFromDB.getToken().equals(userTokenSession.getToken())){
                 log.info(USER + userTokenSession.getUsername()+ " has invalid user and token mapping. Please generate new token.");
@@ -60,7 +60,7 @@ public class UserTokenSessionServiceImpl implements UserTokenSessionService {
             userTokenSessionRepository.delete(userTokenSessionFromDB);
             throw new UsernameNotFoundException(USER + username + " has invalid user, session-id and token mapping. Please generate new token.");
 
-        }else {
+        }*/else {
 
             log.info(USER + username + " has valid token.");
             return true;

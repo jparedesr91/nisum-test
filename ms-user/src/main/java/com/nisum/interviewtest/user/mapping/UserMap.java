@@ -36,6 +36,5 @@ public interface UserMap {
     @Mapping(target = "updatedTime", source = "source.updatedTime")
     UserResponseDTO mapToResponseDto (User source, String token);
 
-    @Mapping(target = "token", ignore = true)
     UserResponseDTO mapToResponseDto (User source);
 }

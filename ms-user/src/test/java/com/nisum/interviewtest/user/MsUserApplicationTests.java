@@ -11,6 +11,10 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
@@ -25,8 +29,9 @@ public class MsUserApplicationTests {
 
 	@Test
 	public void testSearchData() {
-		when(userRepository.findByUsername("jparedesr91@gmail.com")).thenReturn(new User());
-		assertEquals(new UserResponseDTO(), userService.search("jparedesr91@gmail.com"));
+		LocalDateTime rightNow = LocalDateTime.now();
+		when(userRepository.findByUsername("jparedesr91@gmail.com")).thenReturn(new User(UUID.fromString("4bb2a34a-a074-4cb6-86cd-9d00ec74f93b"),"julio@gmail.com","julio","password",true, rightNow,rightNow,rightNow,null,null));
+		assertEquals(new UserResponseDTO(UUID.fromString("4bb2a34a-a074-4cb6-86cd-9d00ec74f93b"),true,rightNow,rightNow,rightNow,null), userService.search("jparedesr91@gmail.com"));
 	}
 
 }

@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @Entity
@@ -18,8 +19,8 @@ import java.util.List;
 public class User {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Integer id;
+  @Column(columnDefinition = "BINARY(16)")
+  private UUID id = UUID.randomUUID();
 
   @Size(min = 4, max = 255, message = "Minimum username length: 4 characters")
   @Column(name = "username", unique = true, nullable = false)
@@ -62,6 +63,7 @@ public class User {
     createdTime = LocalDateTime.now();
     updatedTime = LocalDateTime.now();
     loginTime = LocalDateTime.now();
+    active = true;
   }
 
   @PreUpdate
