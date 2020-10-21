@@ -302,7 +302,7 @@ Following beans are configured and instantiated in this class:
 1. `JwtTokenFilter`
 3. `PasswordEncoder`
 
-Also, inside `WebSecurityConfig#configure(HttpSecurity http)` method we'll configure patterns to define protected/unprotected API endpoints. Please note that we have disabled CSRF protection because we are not using Cookies.
+Also, inside `WebSecurityConfig#configure(HttpSecurity http)` method we'll configure patterns to define protected/unprotected API endpoints.
 
 ```java
 
@@ -322,7 +322,7 @@ http.apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
 
 # How to use this code?
 
-1. Make sure you have [Java 8](https://www.java.com/download/) and [Maven](https://maven.apache.org) installed
+1. Make sure you have [Java 8](https://www.java.com/download/) and [Gradle](https://gradle.org/) installed
 
 2. Fork this repository and clone it
   
