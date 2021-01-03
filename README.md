@@ -167,11 +167,11 @@ spring:
           new_generator_mappings: false
 ```
 
-## DB Diagram
+## ER Diagram
 
-x-special/nautilus-clipboard
-copy
-file:///home/julio/Pictures/Screenshot%20from%202021-01-03%2013-38-03.png
+![Alt text](file:///home/julio/Pictures/Screenshot%20from%202021-01-03%2013-38-03.png?raw=true "ER Diagram")
+
+
 
 
 
