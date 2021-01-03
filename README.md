@@ -110,34 +110,22 @@ server:
 
 7. Make a GET request to `/users/me` to check you're not authenticated. You should receive a response with a `403` with an `Access Denied` message since you haven't set your valid JWT token yet
 
-```
-$ curl -X GET http://localhost:8081/users/me
-```
+![401](https://github.com/jparedesr91/nisum-test/blob/main/user_me_401.png?raw=true "401")
 
-8. Make a POST request to `/users/signin` with the default admin user we programatically created to get a valid JWT token
+8. Make a POST request to `/users/signup` to create a new user and get JWT token
 
-```
-$ curl -X POST 'http://localhost:8081/users/signin?username=admin@admin.com&password=admin'
-```
+![Create-User](https://github.com/jparedesr91/nisum-test/blob/main/create_user.png?raw=true "Create User")
+![Created-User](https://github.com/jparedesr91/nisum-test/blob/main/created_user.png?raw=true "Created User")
 
 9. Add the JWT token as a Header parameter and make the initial GET request to `/users/me` again
 
-```
-$ curl -X GET http://localhost:8081/users/me -H 'Authorization: Bearer <JWT_TOKEN>'
-```
+![Bearer Token](https://github.com/jparedesr91/nisum-test/blob/main/header.png?raw=true "Bearer Token")
+
 
 10. And that's it, congrats! You should get a similar response to this one, meaning that you're now authenticated
 
-```javascript
-{
-  "id": 1,
-  "isactive": false,
-  "created": "2020-10-19T03:19:24.91",
-  "modified": "2020-10-19T03:19:24.91",
-  "last_login": "2020-10-19T03:19:24.91",
-  "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqcGFyZWRlc0BnbWFpbC5jb20iLCJhdXRoIjpbeyJhdXRob3JpdHkiOiJST0xFX0FETUlOIn1dLCJpYXQiOjE2MDMwOTE5NjUsImV4cCI6MTYwMzA5MTk2NX0.UkMrKsp5QEomnMBG0DslNM3SKtLMfrxreLFBMoeg07E"
-}
-```
+![UserMe Response](https://github.com/jparedesr91/nisum-test/blob/main/user_me_response.png?raw=true "UserMe Response")
+
 
 # Implementation Details
 
