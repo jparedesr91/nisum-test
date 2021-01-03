@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-@Table(name = "tbl_user_token_session")
+@Table(name = "user_token_session")
 public class UserTokenSession {
 
     static final long serialVersionUID = 1L;
