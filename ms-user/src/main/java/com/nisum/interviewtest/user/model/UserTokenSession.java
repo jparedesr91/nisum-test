@@ -1,11 +1,14 @@
 package com.nisum.interviewtest.user.model;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Builder;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
+@Builder
 @Table(name = "user_token_session")
 public class UserTokenSession {
 
@@ -60,6 +63,16 @@ public class UserTokenSession {
         this.token = token;
         this.sessionId = sessionId;
         this.expiryTime = expiryTime;
+    }
+
+    public UserTokenSession(Long id, String username, String token, String sessionId, Long expiryTime, LocalDateTime createdTime, LocalDateTime updatedTime) {
+        this.id = id;
+        this.username = username;
+        this.token = token;
+        this.sessionId = sessionId;
+        this.expiryTime = expiryTime;
+        this.createdTime = createdTime;
+        this.updatedTime = updatedTime;
     }
 
     public Long getId() {
