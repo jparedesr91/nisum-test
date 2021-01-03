@@ -86,7 +86,7 @@ $ git clone https://github.com/jparedesr91/nisum-test
 3. Navigate into the folder
 
 ```
-$ cd ms-user
+$ cd nisum-test/ms-user
 ```
 
 4. Install dependencies
