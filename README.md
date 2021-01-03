@@ -117,7 +117,7 @@ $ curl -X GET http://localhost:8081/users/me
 8. Make a POST request to `/users/signin` with the default admin user we programatically created to get a valid JWT token
 
 ```
-$ curl -X POST 'http://localhost:8081/users/signin?username=admin&password=admin'
+$ curl -X POST 'http://localhost:8081/users/signin?username=admin@admin.com&password=admin'
 ```
 
 9. Add the JWT token as a Header parameter and make the initial GET request to `/users/me` again
