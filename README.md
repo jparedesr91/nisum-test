@@ -167,7 +167,9 @@ spring:
           new_generator_mappings: false
 ```
 
-## Class Diagram
+## ER Diagram
+
+![Alt text](file:///home/julio/Pictures/Screenshot%20from%202021-01-03%2013-38-03.png?raw=true "ER Diagram")
 
 
 
