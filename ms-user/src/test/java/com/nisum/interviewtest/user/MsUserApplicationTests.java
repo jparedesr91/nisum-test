@@ -31,7 +31,7 @@ public class MsUserApplicationTests {
 	public void testSearchData() {
 		LocalDateTime rightNow = LocalDateTime.now();
 		when(userRepository.findByUsername("jparedesr91@gmail.com")).thenReturn(new User(UUID.fromString("4bb2a34a-a074-4cb6-86cd-9d00ec74f93b"),"julio@gmail.com","julio","password",true, rightNow,rightNow,rightNow,null,null));
-		assertEquals(new UserResponseDTO(UUID.fromString("4bb2a34a-a074-4cb6-86cd-9d00ec74f93b"),true,rightNow,rightNow,rightNow,null), userService.search("jparedesr91@gmail.com"));
+		assertEquals(new UserResponseDTO(UUID.fromString("4bb2a34a-a074-4cb6-86cd-9d00ec74f93b"),true,rightNow,rightNow,rightNow,null), userService.search(null,"jparedesr91@gmail.com"));
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.nisum.interviewtest.user.service;
 
+import com.nisum.interviewtest.user.dto.ResponseDTO;
 import com.nisum.interviewtest.user.dto.UserDataDTO;
 import com.nisum.interviewtest.user.dto.UserResponseDTO;
 import com.nisum.interviewtest.user.errors.EntityNotFoundException;
@@ -64,16 +65,22 @@ public class UserService {
     }
   }
 
-  public UserResponseDTO search(String username) {
+  public ResponseDTO search(HttpServletRequest req, String username) {
     User user = userRepository.findByUsername(username);
     if (user == null) {
       throw new EntityNotFoundException(User.class, "username", username);
     }
-    return USER_MAP.mapToResponseDto(user);
+    return ResponseDTO.builder()
+            .data(USER_MAP.mapToResponseDto(user,jwtTokenProvider.resolveToken(req)))
+            .mensaje("Usuario encontrado exitosamente!!")
+            .build();
   }
 
-  public UserResponseDTO whoami(HttpServletRequest req) {
-    return USER_MAP.mapToResponseDto(userRepository.findByUsername(jwtTokenProvider.getUsername(jwtTokenProvider.resolveToken(req))));
+  public ResponseDTO whoami(HttpServletRequest req) {
+    return ResponseDTO.builder()
+            .data(USER_MAP.mapToResponseDto(userRepository.findByUsername(jwtTokenProvider.getUsername(jwtTokenProvider.resolveToken(req))),jwtTokenProvider.resolveToken(req)))
+            .mensaje("Usuario encontrado exitosamente!!")
+            .build();
   }
 
   public String refresh(String username) {

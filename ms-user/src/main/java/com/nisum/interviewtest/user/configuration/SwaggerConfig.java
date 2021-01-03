@@ -45,7 +45,7 @@ public class SwaggerConfig {
   }
   
   private ApiKey apiKey() {
-    return new ApiKey(AUTHORIZATION, AUTHORIZATION, "header");
+    return new ApiKey("apiKey", AUTHORIZATION, "header");
   }
 
   private SecurityContext securityContext() {
@@ -59,7 +59,7 @@ public class SwaggerConfig {
     AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
     AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
     authorizationScopes[0] = authorizationScope;
-    return Collections.singletonList(new SecurityReference(AUTHORIZATION, authorizationScopes));
+    return Collections.singletonList(new SecurityReference("apiKey", authorizationScopes));
   }
 
 }

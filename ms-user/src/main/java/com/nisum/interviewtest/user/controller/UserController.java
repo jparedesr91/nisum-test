@@ -1,5 +1,6 @@
 package com.nisum.interviewtest.user.controller;
 
+import com.nisum.interviewtest.user.dto.ResponseDTO;
 import com.nisum.interviewtest.user.dto.UserDataDTO;
 import com.nisum.interviewtest.user.dto.UserResponseDTO;
 import com.nisum.interviewtest.user.model.UserTokenSession;
@@ -36,21 +37,24 @@ public class UserController {
           @ApiResponse(code = 403, message = "Access denied"),
           @ApiResponse(code = 404, message = "The user doesn't exist"),
           @ApiResponse(code = 422, message = "Username is already in use")})
-  public ResponseEntity<UserResponseDTO> login(
-      @ApiParam("Username") @RequestParam String username,
+  public ResponseEntity<ResponseDTO> login(
+      @ApiParam("Email") @RequestParam String email,
       @ApiParam("Password") @RequestParam String password, @ApiParam(hidden = true) @CookieValue(name = "JSESSIONID", defaultValue = "JSESSIONID") String sessionId) {
 
-    UserResponseDTO userResponseDTO = userService.signin(username, password);
+    UserResponseDTO userResponseDTO = userService.signin(email, password);
 
-    UserTokenSession userTokenSession = new UserTokenSession(username, userResponseDTO.getToken(), sessionId, (long)3600);
+    UserTokenSession userTokenSession = new UserTokenSession(email, userResponseDTO.getToken(), sessionId, (long)3600);
     userTokenSession = userTokenSessionService.saveUserTokenSessionMapping(userTokenSession);
-    log.info("User "+username+" successfully logged in. User, Token and Session mapping stored."+userTokenSession);
+    log.info("User "+email+" successfully logged in. User, Token and Session mapping stored."+userTokenSession);
 
     HttpHeaders responseHeaders = new HttpHeaders();
     responseHeaders.add("Message", "Success");
     responseHeaders.add("Set-Cookie", userTokenSession.getSessionId());
 
-    return new ResponseEntity<>(userResponseDTO, responseHeaders, HttpStatus.OK);
+    return new ResponseEntity<>(ResponseDTO.builder()
+            .data(userResponseDTO)
+            .mensaje("Usuario loggeado exitosamente!!")
+            .build(), responseHeaders, HttpStatus.OK);
   }
 
   @PostMapping("/signup")
@@ -60,7 +64,7 @@ public class UserController {
           @ApiResponse(code = 403, message = "Access denied"),
           @ApiResponse(code = 404, message = "Entity Not Found"),
           @ApiResponse(code = 422, message = "Username is already in use")})
-  public ResponseEntity<UserResponseDTO> signup(@ApiParam("Signup User") @Valid @RequestBody UserDataDTO user, @ApiParam(hidden = true) @CookieValue(name = "JSESSIONID", defaultValue = "JSESSIONID") String sessionId) {
+  public ResponseEntity<ResponseDTO> signup(@ApiParam("Signup User") @Valid @RequestBody UserDataDTO user, @ApiParam(hidden = true) @CookieValue(name = "JSESSIONID", defaultValue = "JSESSIONID") String sessionId) {
 
     UserResponseDTO userResponseDTO = userService.signup(user);
 
@@ -72,10 +76,13 @@ public class UserController {
     responseHeaders.add("Message", "Success");
     responseHeaders.add("Set-Cookie", userTokenSession.getSessionId());
 
-    return new ResponseEntity<>(userResponseDTO, responseHeaders, HttpStatus.CREATED);
+    return new ResponseEntity<>(ResponseDTO.builder()
+            .data(userResponseDTO)
+            .mensaje("Usuario registrado exitosamente!!")
+            .build(), responseHeaders, HttpStatus.CREATED);
   }
 
-  @GetMapping(value = "/{username}")
+  @GetMapping(value = "/{email}")
   @PreAuthorize("hasRole('ROLE_ADMIN')")
   @ApiOperation(value = "${UserController.search}", response = UserResponseDTO.class, authorizations = { @Authorization(value="apiKey") })
   @ApiResponses(value = {
@@ -83,8 +90,8 @@ public class UserController {
       @ApiResponse(code = 403, message = "Access denied"),
       @ApiResponse(code = 404, message = "The user doesn't exist"),
       @ApiResponse(code = 500, message = "Expired or invalid JWT token")})
-  public ResponseEntity<UserResponseDTO> search(@ApiParam("Username") @PathVariable String username) {
-    return new ResponseEntity<>(userService.search(username), HttpStatus.OK);
+  public ResponseEntity<ResponseDTO> search(HttpServletRequest req, @ApiParam("email") @PathVariable String email) {
+    return new ResponseEntity<>(userService.search(req,email), HttpStatus.OK);
   }
 
   @GetMapping(value = "/me")
@@ -94,7 +101,7 @@ public class UserController {
       @ApiResponse(code = 400, message = "Something went wrong"),
       @ApiResponse(code = 403, message = "Access denied"),
       @ApiResponse(code = 500, message = "Expired or invalid JWT token")})
-  public ResponseEntity<UserResponseDTO> whoami(HttpServletRequest req) {
+  public ResponseEntity<ResponseDTO> whoami(HttpServletRequest req) {
     return new ResponseEntity<>(userService.whoami(req), HttpStatus.OK);
   }
 
