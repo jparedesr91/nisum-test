@@ -6,7 +6,7 @@ import com.nisum.interviewtest.user.model.Phone;
 import com.nisum.interviewtest.user.model.Role;
 import com.nisum.interviewtest.user.model.User;
 import com.nisum.interviewtest.user.repository.UserRepository;
-import com.nisum.interviewtest.user.service.UserService;
+import com.nisum.interviewtest.user.service.UserServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -27,7 +27,7 @@ public class MsUserApplicationTests {
 	UserRepository userRepository;
 
 	@InjectMocks
-	UserService userService;
+	UserServiceImpl userService;
 
 	@Mock
 	PasswordEncoder passwordEncoder;
