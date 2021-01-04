@@ -1,6 +1,7 @@
 package com.nisum.interviewtest.user.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
@@ -9,6 +10,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class UserResponseDTO {
   @JsonProperty("id")
   private UUID id;
@@ -22,4 +24,6 @@ public class UserResponseDTO {
   private LocalDateTime loginTime;
   @JsonProperty("token")
   private String token;
+  @JsonProperty("name")
+  private String name;
 }

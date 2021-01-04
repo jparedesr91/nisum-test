@@ -2,6 +2,7 @@ package com.nisum.interviewtest.user.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.nisum.interviewtest.user.model.Role;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +15,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class UserDataDTO {
   @JsonProperty("name")
   @NotBlank(message = "Name is mandatory")

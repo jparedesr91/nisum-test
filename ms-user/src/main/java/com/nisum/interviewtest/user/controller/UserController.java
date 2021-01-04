@@ -5,6 +5,7 @@ import com.nisum.interviewtest.user.dto.UserDataDTO;
 import com.nisum.interviewtest.user.dto.UserResponseDTO;
 import com.nisum.interviewtest.user.model.UserTokenSession;
 import com.nisum.interviewtest.user.service.UserService;
+import com.nisum.interviewtest.user.service.UserServiceImpl;
 import com.nisum.interviewtest.user.service.UserTokenSessionService;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
